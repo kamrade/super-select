@@ -1,0 +1,26 @@
+
+<div
+  #container
+  class="select-with-search"
+
+  (click)="toggleSelect($event)"
+  (clickOutside)='closeSelect()'
+  >
+  <span
+    class="select-title"
+    #caption
+    >
+    Select</span>
+  <input
+    #search
+    class="select-with-search__control"
+    type="text">
+  <ul class="select-content" *ngIf="opened">
+    <li
+      class="select-item"
+      *ngFor="let item of items"
+      (click)="setSelected(item)">
+      {{item.title}}
+    </li>
+  </ul>
+</div>
