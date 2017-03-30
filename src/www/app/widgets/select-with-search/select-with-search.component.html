@@ -15,7 +15,8 @@
     #search
     class="select-with-search__control"
     type="text">
-  <ul class="select-content" *ngIf="opened">
+  <!-- *ngIf="opened" -->
+  <ul class="select-content"  [@selectState]="selectState">
     <li
       class="select-item"
       *ngFor="let item of items"

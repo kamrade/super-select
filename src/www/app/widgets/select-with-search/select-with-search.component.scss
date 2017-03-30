@@ -1,7 +1,7 @@
 $c-border: #c1c5c9;
 $c-text: #515559;
 $c-text-sec: $c-border;
-$c-acc: #4886FF;
+$c-acc: #00c800;
 $border-r: 4px;
 
 .select-with-search {
@@ -22,11 +22,11 @@ $border-r: 4px;
     border-color: $c-acc;
     border-radius: $border-r $border-r 0 0;
     .select-content {
-      border: 1px solid $c-border;
-      opacity: 1;
-      border-color: $c-acc;
-      border-top-color: $c-border;
-      border-radius: 0 0 $border-r $border-r;
+      // border: 1px solid $c-border;
+      // opacity: 1;
+      // border-color: $c-acc;
+      // border-top-color: $c-border;
+      // border-radius: 0 0 $border-r $border-r;
     }
     .select-with-search__control {
       display: block;
@@ -74,13 +74,15 @@ $border-r: 4px;
   border: none;
   position: absolute;
   top: 46px;
-  opacity: 0;
   left: -8px;
   width: calc(100% + 9px);
   max-height: 144px;
   overflow-y: scroll;
   padding-left: 0;
-  transition: all .15s ease-in;
+  border: 1px solid $c-border;
+  border-color: $c-acc;
+  border-top-color: $c-border;
+  border-radius: 0 0 $border-r $border-r;
 }
 
 .select-item {
