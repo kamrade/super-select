@@ -1,7 +1,9 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, OnInit } from '@angular/core';
 
-import { items } from './select-items.mockup';
+// import { SELECT_ELEMENTS } from './select-elements-mockup';
 import { SelectElement } from './select-element';
+
+import { SelectWithSearchService } from './select-with-search.service';
 
 import {trigger, state, animate, style, transition} from '@angular/core';
 
@@ -9,6 +11,7 @@ import {trigger, state, animate, style, transition} from '@angular/core';
     selector: 'vl-select-with-search',
     templateUrl: 'select-with-search.component.html',
     styleUrls: ['select-with-search.component.scss'],
+    providers: [ SelectWithSearchService ],
     animations: [
       trigger('selectState', [
         state('inactive', style({
@@ -27,9 +30,16 @@ import {trigger, state, animate, style, transition} from '@angular/core';
     ]
 })
 
-export class SelectWithSearchComponent {
+export class SelectWithSearchComponent implements OnInit {
+
   selected: SelectElement;
-  items: SelectElement[] = items;
+  filterValue: string;
+
+  // items: SelectElement[] = SELECT_ELEMENTS;
+  // selectItems: SelectElement[] = SELECT_ELEMENTS;
+  items: SelectElement[];
+  selectItems: SelectElement[];
+
   opened: boolean = false;
   selectState: string = "inactive";
 
@@ -38,8 +48,22 @@ export class SelectWithSearchComponent {
   @ViewChild('search')
   search;
 
-  toggleSelect(e) {
+  constructor(
+    private selectWithSearchService: SelectWithSearchService
+  ) {}
 
+  ngOnInit(): void {
+    console.log(this.selected);
+    this.getSelectItems();
+    this.search.nativeElement.value = this.selected ? this.selected.name : "";
+  }
+
+  getSelectItems(): void {
+    this.items = this.selectWithSearchService.getSelectElements();
+    this.selectItems = this.selectWithSearchService.getSelectElements();
+  }
+
+  toggleSelect(e) {
     if (e.target == this.search.nativeElement) {
       console.log("dont close");
     } else {
@@ -59,4 +83,21 @@ export class SelectWithSearchComponent {
   setSelected(item): void {
     this.selected = item;
   }
+
+  startFilter(e): void {
+    this.filterValue = this.search.nativeElement.value.toLowerCase();
+
+    if (this.filterValue != '' && this.filterValue.length > 1) {
+      this.selectItems = this.items.filter( (value) => {
+        if ( value.name.toLowerCase().indexOf(this.filterValue) >= 0 ) {
+          return true;
+        }
+      });
+    } else {
+      this.selectItems = this.items;
+    }
+
+  }
+
+
 }

@@ -21,16 +21,8 @@ $border-r: 4px;
     border-left: 8px solid $c-border;
     border-color: $c-acc;
     border-radius: $border-r $border-r 0 0;
-    .select-content {
-      // border: 1px solid $c-border;
-      // opacity: 1;
-      // border-color: $c-acc;
-      // border-top-color: $c-border;
-      // border-radius: 0 0 $border-r $border-r;
-    }
     .select-with-search__control {
       display: block;
-      opacity: 1;
       position: relative;
       z-index: 1;
       top: 0;
@@ -55,14 +47,12 @@ $border-r: 4px;
 
 .select-with-search__control {
   box-shadow: none;
-  // border: 1px dotted $c-border;
   font-size: 18px;
   background: transparent;
   border: none;
   width: 100%;
   position: relative;
   top: -5px;
-  opacity: 0;
   display: none;
   &:focus {
     outline: none;

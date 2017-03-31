@@ -9,7 +9,7 @@
 
         "watch": "webpack --watch --progress --profile",
         "build": "rimraf target && webpack --progress --profile --bail",
-        "server": "webpack-dev-server --inline --progress --port 8080 --content-base target/dist --host localhost",
+        "server": "webpack-dev-server --inline --progress --port 2222 --content-base target/dist --host localhost",
         "server-public": "webpack-dev-server --inline --progress --port 8080 --content-base target/dist --host 0.0.0.0",
 
         "start": "npm run server -- --hot",
