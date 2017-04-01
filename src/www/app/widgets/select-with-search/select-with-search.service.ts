@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SelectElement } from './select-element';
-import { SELECT_ELEMENTS } from './select-elements-mockup'
+import { SELECT_ELEMENTS } from './select-elements-mockup';
 
 @Injectable()
 export class SelectWithSearchService {

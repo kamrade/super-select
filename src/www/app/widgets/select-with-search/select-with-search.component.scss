@@ -82,3 +82,8 @@ $border-r: 4px;
     background: rgba(0,0,0,0.08);
   }
 }
+
+.select-with-search__control:focus ~ .select-title {
+  top: 4px;
+  color: $c-acc;
+}

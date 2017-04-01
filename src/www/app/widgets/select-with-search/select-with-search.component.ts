@@ -1,6 +1,4 @@
-import { Component, Input, ViewChild, OnInit } from '@angular/core';
-
-// import { SELECT_ELEMENTS } from './select-elements-mockup';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { SelectElement } from './select-element';
 
 import { SelectWithSearchService } from './select-with-search.service';
@@ -15,14 +13,14 @@ import {trigger, state, animate, style, transition} from '@angular/core';
     animations: [
       trigger('selectState', [
         state('inactive', style({
-          height: "0",
-          borderWidth: "0px",
-          opacity: "0"
+          height: '0',
+          borderWidth: '0px',
+          opacity: '0'
         })),
         state('active', style({
-          height: "140px",
-          borderWidth: "1px",
-          opacity: "1"
+          height: '140px',
+          borderWidth: '1px',
+          opacity: '1'
         })),
         transition('inactive => active', animate('140ms ease-in')),
         transition('active => inactive', animate('140ms ease-out'))
@@ -32,16 +30,18 @@ import {trigger, state, animate, style, transition} from '@angular/core';
 
 export class SelectWithSearchComponent implements OnInit {
 
+  // выбранный элемент
   selected: SelectElement;
+  // значение фильтра
   filterValue: string;
-
-  // items: SelectElement[] = SELECT_ELEMENTS;
-  // selectItems: SelectElement[] = SELECT_ELEMENTS;
+  // изначальные элементы
   items: SelectElement[];
+  // отфильтрованные элементы
   selectItems: SelectElement[];
-
+  // открыт?
   opened: boolean = false;
-  selectState: string = "inactive";
+  // статус селекта
+  selectState: string = 'inactive';
 
   @ViewChild('container')
   container;
@@ -53,9 +53,8 @@ export class SelectWithSearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.selected);
     this.getSelectItems();
-    this.search.nativeElement.value = this.selected ? this.selected.name : "";
+    // this.search.nativeElement.value = this.selected ? this.selected.name : '';
   }
 
   getSelectItems(): void {
@@ -64,20 +63,20 @@ export class SelectWithSearchComponent implements OnInit {
   }
 
   toggleSelect(e) {
-    if (e.target == this.search.nativeElement) {
-      console.log("dont close");
+    if (e.target === this.search.nativeElement) {
+      console.log('dont close');
     } else {
-      this.container.nativeElement.classList.toggle("open");
+      this.container.nativeElement.classList.toggle('open');
       this.opened = !this.opened;
-      this.selectState = (this.selectState == "inactive") ? "active" : "inactive";
+      this.selectState = (this.selectState === 'inactive') ? 'active' : 'inactive';
     }
     this.search.nativeElement.focus();
   }
 
   closeSelect() {
-    this.container.nativeElement.classList.remove("open");
+    this.container.nativeElement.classList.remove('open');
     this.opened = false;
-    this.selectState = "inactive";
+    this.selectState = 'inactive';
   }
 
   setSelected(item): void {
@@ -87,7 +86,7 @@ export class SelectWithSearchComponent implements OnInit {
   startFilter(e): void {
     this.filterValue = this.search.nativeElement.value.toLowerCase();
 
-    if (this.filterValue != '' && this.filterValue.length > 1) {
+    if (this.filterValue !== '' && this.filterValue.length > 1) {
       this.selectItems = this.items.filter( (value) => {
         if ( value.name.toLowerCase().indexOf(this.filterValue) >= 0 ) {
           return true;

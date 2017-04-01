@@ -6,18 +6,21 @@
   (click)="toggleSelect($event)"
   (clickOutside)='closeSelect()'
   >
+
   <span
     class="select-title"
     #caption
     >
     Select</span>
+
   <input
     #search
     class="select-with-search__control"
     (keyup)="startFilter($event)"
     type="text">
+
   <!-- *ngIf="opened" -->
-  <ul class="select-content"  [@selectState]="selectState">
+  <ul class="select-content" [@selectState]="selectState">
     <li
       class="select-item"
       *ngFor="let item of selectItems; let i = index;"
