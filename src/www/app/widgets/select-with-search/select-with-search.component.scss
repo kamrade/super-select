@@ -25,7 +25,7 @@ $border-r: 4px;
       display: block;
       position: relative;
       z-index: 1;
-      top: 0;
+      top: 16px;
     }
     .select-title {
       color: $c-acc;
@@ -39,7 +39,7 @@ $border-r: 4px;
   font-size: 14px;
   font-weight: bold;
   color: $c-text-sec;
-  position: relative;
+  position: absolute;
   line-height: 16px;
   transition: top .2s ease;
   top: 13px;
@@ -51,9 +51,9 @@ $border-r: 4px;
   background: transparent;
   border: none;
   width: 100%;
-  position: relative;
-  top: -5px;
-  display: none;
+  position: absolute;
+  top: 16px;
+  // display: none;
   &:focus {
     outline: none;
   }
@@ -73,6 +73,7 @@ $border-r: 4px;
   border-color: $c-acc;
   border-top-color: $c-border;
   border-radius: 0 0 $border-r $border-r;
+  background-color: #fff;
 }
 
 .select-item {
