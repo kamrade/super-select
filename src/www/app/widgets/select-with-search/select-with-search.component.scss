@@ -4,7 +4,7 @@ $c-text-sec: $c-border;
 $c-acc: #00c800;
 $border-r: 4px;
 
-.select-with-search {
+.select-container {
   height: 3rem;
   border-radius: $border-r;
   border: 1px solid $c-border;
@@ -21,17 +21,13 @@ $border-r: 4px;
     border-left: 8px solid $c-border;
     border-color: $c-acc;
     border-radius: $border-r $border-r 0 0;
-    .select-with-search__control {
-      display: block;
-      position: relative;
-      z-index: 1;
-      top: 16px;
-    }
-    .select-title {
-      color: $c-acc;
-      top: 4px;
-    }
   }
+}
+
+.select-controls{
+  position: relative;
+  height: 48px;
+
 }
 
 .select-title {
@@ -40,12 +36,12 @@ $border-r: 4px;
   font-weight: bold;
   color: $c-text-sec;
   position: absolute;
-  line-height: 16px;
+  z-index: 2;
+  line-height: 48px;
   transition: top .2s ease;
-  top: 13px;
 }
 
-.select-with-search__control {
+.select-control__search {
   box-shadow: none;
   font-size: 18px;
   background: transparent;
@@ -62,6 +58,7 @@ $border-r: 4px;
 .select-content {
   list-style: none;
   border: none;
+  margin: 0;
   position: absolute;
   top: 46px;
   left: -8px;
@@ -82,9 +79,4 @@ $border-r: 4px;
   &:hover {
     background: rgba(0,0,0,0.08);
   }
-}
-
-.select-with-search__control:focus ~ .select-title {
-  top: 4px;
-  color: $c-acc;
 }

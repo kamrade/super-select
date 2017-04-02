@@ -1,27 +1,30 @@
 
 <div
   #container
-  class="select-with-search"
-  (click)="toggleSelect($event)"
-  (clickOutside)='closeSelect()'
-  >
+  class="select-container"
+  (clickOutside)='closeSelect()'>
 
-  <input #search class="select-with-search__control"
-        (keyup)="startFilter($event)" type="text"
-        (focus)="searchFocused()"
-        (blur)="closeSelect()">
+  <div (click)="toggleSelect($event)"
+       class="select-controls">
 
-  <span class="select-title" #caption>
-    Select
-  </span>
+    <input #search class="select-control__search" type="text"
+      (keyup)="startFilter($event)"
+      (focus)="openSelect()"
+      (blur)="onSearchBlur($event)">
 
-  <!-- *ngIf="opened" -->
-  <ul class="select-content" [@selectContentState]="selectContentState">
-    <li
-      class="select-item"
-      (click)="setCurrentValue(item)"
-      *ngFor="let item of selectItems; let i = index;">
-      {{i}} - {{item.name}}
-    </li>
-  </ul>
+    <span class="select-title" #caption>
+      Select
+    </span>
+  </div>
+
+  <div class="select-options">
+    <ul class="select-content" [@selectContentState]="status">
+      <li
+        class="select-item"
+        (click)="selectOption(item)"
+        *ngFor="let item of selectItems; let i = index;">
+        {{i}} - {{item.name}}
+      </li>
+    </ul>
+  </div>
 </div>

@@ -1,6 +1,6 @@
-import { SelectElement } from './select-element';
+import { SelectOption } from './select-option';
 
-export const SELECT_ELEMENTS: SelectElement[] = [
+export const SELECT_OPTIONS: SelectOption[] = [
   {
     '_id': '58ddc57b1c2b353c27706b11',
     'name': 'Rollins Harrell'

@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { SelectElement } from './select-element';
 
+import { SelectOption } from './select-option';
 import { SelectWithSearchService } from './select-with-search.service';
 
 import {trigger, state, animate, style, transition} from '@angular/core';
@@ -30,17 +30,11 @@ import {trigger, state, animate, style, transition} from '@angular/core';
 
 export class SelectWithSearchComponent implements OnInit {
 
-  // значение фильтра
-  filterValue: string;
-  // изначальные элементы
-  items: SelectElement[];
-  // отфильтрованные элементы
-  selectItems: SelectElement[];
-  // открыт?
-  opened: boolean = false;
-  // статус селекта
-  selectContentState: string = 'inactive';
-  currentValue: SelectElement;
+  filterValue: string = '';
+  items: SelectOption[];       // initial options
+  selectItems: SelectOption[]; // filterd options
+  status: string = 'inactive';  // active/inactive
+  currentValue: SelectOption;
 
   @ViewChild('container')
   container;
@@ -52,37 +46,40 @@ export class SelectWithSearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getSelectItems();
-  }
-
-  getSelectItems(): void {
     this.items = this.selectWithSearchService.getSelectElements();
     this.selectItems = this.selectWithSearchService.getSelectElements();
   }
 
+  onSearchBlur(e) {
+    setTimeout(() => {
+      this.closeSelect();
+    }, 100);
+
+  }
+
+  selectOption(item) {
+    console.log('select option');
+    console.log(item, 'selected');
+  }
+
   openSelect() {
     console.log('open select');
-    this.container.nativeElement.classList.add('open');
-    this.selectContentState = 'active';
+    this.status = 'active';
   }
 
   toggleSelect(e) {
     console.log('toggle select');
-    if (e.target === this.search.nativeElement) {
-      console.log('dont close');
+    if(e.target === this.search.nativeElement) {
+      console.log('do nothing');
     } else {
-      this.container.nativeElement.classList.toggle('open');
-      this.opened = !this.opened;
-      this.selectContentState = (this.selectContentState === 'inactive') ? 'active' : 'inactive';
+      this.search.nativeElement.focus();
+      this.status = (this.status === 'active') ? 'inactive' : 'active';
     }
-    this.search.nativeElement.focus();
   }
 
   closeSelect() {
     console.log('close select');
-    this.container.nativeElement.classList.remove('open');
-    this.opened = false;
-    this.selectContentState = 'inactive';
+    this.status = 'inactive';
     this.search.nativeElement.value = '';
     this.filterValue = '';
     this.selectItems = this.items;
@@ -99,17 +96,6 @@ export class SelectWithSearchComponent implements OnInit {
     } else {
       this.selectItems = this.items;
     }
-
-  }
-
-  searchFocused() {
-    console.log('start focused');
-    this.openSelect();
-  }
-
-  setCurrentValue(element: SelectElement) {
-    this.currentValue = element;
-    console.log(this.currentValue);
   }
 
 }
